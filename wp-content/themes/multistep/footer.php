@@ -14,5 +14,7 @@
 <?php wp_footer(); ?>
 
 </div>
+
+<noscript>We're sorry but multistep doesn't work properly without JavaScript enabled. Please enable it to continue.</noscript>
 </body>
 </html>

@@ -134,6 +134,8 @@ function multistep_widgets_init() {
 }
 add_action( 'widgets_init', 'multistep_widgets_init' );
 
+$MULTISTEP_VERSION = "1.0";
+
 /**
  * Enqueue scripts and styles.
  */
@@ -141,7 +143,17 @@ function multistep_scripts() {
 	wp_enqueue_style( 'multistep-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'multistep-style', 'rtl', 'replace' );
 
+	$app_style = glob('wp-content/themes/' . get_current_theme() . '/js/multistep-form/multistep/dist/css/app.*.css')[0];
+	wp_enqueue_style( 'multistep-form-style', '/' . $app_style, array(), $MULTISTEP_VERSION );
+
 	wp_enqueue_script( 'multistep-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+
+	$app_script = glob('wp-content/themes/' . get_current_theme() . '/js/multistep-form/multistep/dist/js/app.*.js')[0];
+	$vendors_script = glob('wp-content/themes/' . get_current_theme() . '/js/multistep-form/multistep/dist/js/chunk-vendors.*.js')[0];
+	wp_enqueue_script( 'multistep-form-app', '/' . $app_script, array(), $MULTISTEP_VERSION, true );
+	wp_enqueue_script( 'multistep-form-vendors', '/' . $vendors_script, array(), $MULTISTEP_VERSION, true );
+
+	wp_enqueue_script( 'multistep-form-rewrite', get_template_directory_uri() . '/js/multistep-form/multistep-rewrite.js', array(), $MULTISTEP_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

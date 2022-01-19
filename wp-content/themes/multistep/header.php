@@ -19,6 +19,9 @@
 
 	<?php wp_head(); ?>
 </head>
+<script>
+	const themeName = '<?php echo get_current_theme(); ?>'
+</script>
 
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
