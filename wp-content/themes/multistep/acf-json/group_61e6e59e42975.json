@@ -158,7 +158,7 @@
                     "min": 1,
                     "max": 0,
                     "layout": "table",
-                    "button_label": "Add another step",
+                    "button_label": "Add Step",
                     "sub_fields": [
                         {
                             "key": "field_61e6ea9e3d065",
@@ -281,7 +281,7 @@
                                     "min": 1,
                                     "max": 0,
                                     "layout": "block",
-                                    "button_label": "",
+                                    "button_label": "Add Group",
                                     "sub_fields": [
                                         {
                                             "key": "field_61e6ea613d064",
@@ -296,7 +296,7 @@
                                                 "class": "",
                                                 "id": ""
                                             },
-                                            "layout": "row",
+                                            "layout": "block",
                                             "sub_fields": [
                                                 {
                                                     "key": "field_61e6e9893d05e",
@@ -412,7 +412,7 @@
                                                     "min": 1,
                                                     "max": 0,
                                                     "layout": "block",
-                                                    "button_label": "",
+                                                    "button_label": "Add Field",
                                                     "sub_fields": [
                                                         {
                                                             "key": "field_61e7ca3fcee88",
@@ -484,6 +484,30 @@
                                                                     "maxlength": ""
                                                                 },
                                                                 {
+                                                                    "key": "field_61eacf46c787e",
+                                                                    "label": "Field Required",
+                                                                    "name": "field_required",
+                                                                    "type": "radio",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": 0,
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "choices": {
+                                                                        "Required": "Required",
+                                                                        "Optional": "Optional"
+                                                                    },
+                                                                    "allow_null": 0,
+                                                                    "other_choice": 0,
+                                                                    "default_value": "Optional",
+                                                                    "layout": "horizontal",
+                                                                    "return_format": "value",
+                                                                    "save_other_choice": 0
+                                                                },
+                                                                {
                                                                     "key": "field_61e7ce688f781",
                                                                     "label": "Field Type",
                                                                     "name": "",
@@ -517,10 +541,11 @@
                                                                         "Email": "Email",
                                                                         "Number": "Number",
                                                                         "Password": "Password",
+                                                                        "Textrows": "Textrows",
                                                                         "Checkbox": "Checkbox",
                                                                         "Radio Group": "Radio Group",
                                                                         "Selection": "Selection",
-                                                                        "Range": "Range",
+                                                                        "Slider": "Slider",
                                                                         "Date": "Date"
                                                                     },
                                                                     "default_value": "Textfield",
@@ -532,13 +557,417 @@
                                                                     "placeholder": ""
                                                                 },
                                                                 {
+                                                                    "key": "field_61ee5ab495bbb",
+                                                                    "label": "Radio Group Items",
+                                                                    "name": "radio_items",
+                                                                    "type": "repeater",
+                                                                    "instructions": "",
+                                                                    "required": 1,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Radio Group"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "collapsed": "",
+                                                                    "min": 1,
+                                                                    "max": 0,
+                                                                    "layout": "block",
+                                                                    "button_label": "Add Radio Button",
+                                                                    "sub_fields": [
+                                                                        {
+                                                                            "key": "field_61ee5b0495bbc",
+                                                                            "label": "Radio Button Label",
+                                                                            "name": "radio_button_label",
+                                                                            "type": "text",
+                                                                            "instructions": "",
+                                                                            "required": 0,
+                                                                            "conditional_logic": 0,
+                                                                            "wrapper": {
+                                                                                "width": "",
+                                                                                "class": "",
+                                                                                "id": ""
+                                                                            },
+                                                                            "default_value": "",
+                                                                            "placeholder": "",
+                                                                            "prepend": "",
+                                                                            "append": "",
+                                                                            "maxlength": ""
+                                                                        },
+                                                                        {
+                                                                            "key": "field_61ee5b1b95bbd",
+                                                                            "label": "Radio Button Value",
+                                                                            "name": "radio_button_value",
+                                                                            "type": "text",
+                                                                            "instructions": "",
+                                                                            "required": 0,
+                                                                            "conditional_logic": 0,
+                                                                            "wrapper": {
+                                                                                "width": "",
+                                                                                "class": "",
+                                                                                "id": ""
+                                                                            },
+                                                                            "default_value": "",
+                                                                            "placeholder": "",
+                                                                            "prepend": "",
+                                                                            "append": "",
+                                                                            "maxlength": ""
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "key": "field_61ead66249ff7",
+                                                                    "label": "Select Items",
+                                                                    "name": "select_items",
+                                                                    "type": "text",
+                                                                    "instructions": "Every single item separated by comma",
+                                                                    "required": 1,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Selection"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "maxlength": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61ead79ccc06b",
+                                                                    "label": "Select Default",
+                                                                    "name": "select_default",
+                                                                    "type": "text",
+                                                                    "instructions": "One item from the list",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Selection"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "maxlength": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61eac8148d496",
+                                                                    "label": "Slider Min Value",
+                                                                    "name": "slider_min_value",
+                                                                    "type": "number",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Slider"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "min": 0,
+                                                                    "max": "",
+                                                                    "step": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61eac8d5cde63",
+                                                                    "label": "Slider Max Value",
+                                                                    "name": "slider_max_value",
+                                                                    "type": "number",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Slider"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "min": 1,
+                                                                    "max": "",
+                                                                    "step": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61eac907cde64",
+                                                                    "label": "Slider Ticks",
+                                                                    "name": "slider_ticks",
+                                                                    "type": "radio",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Slider"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "choices": {
+                                                                        "Allow": "Allow",
+                                                                        "Deny": "Deny"
+                                                                    },
+                                                                    "allow_null": 0,
+                                                                    "other_choice": 0,
+                                                                    "default_value": "Deny",
+                                                                    "layout": "horizontal",
+                                                                    "return_format": "value",
+                                                                    "save_other_choice": 0
+                                                                },
+                                                                {
+                                                                    "key": "field_61eac982cde65",
+                                                                    "label": "Slider Step",
+                                                                    "name": "slider_step",
+                                                                    "type": "number",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Slider"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "min": 1,
+                                                                    "max": "",
+                                                                    "step": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61eab3482e57a",
+                                                                    "label": "Checkbox Label",
+                                                                    "name": "checkbox_label",
+                                                                    "type": "text",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Checkbox"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "maxlength": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61e95009b6475",
+                                                                    "label": "Placeholder",
+                                                                    "name": "placeholder",
+                                                                    "type": "text",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Textfield"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Email"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Number"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e951e9b648c",
+                                                                                "operator": "==",
+                                                                                "value": "Regular"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Password"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Date"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Textrows"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "maxlength": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61eab6457f676",
+                                                                    "label": "Textarea Rows",
+                                                                    "name": "textarea_rows",
+                                                                    "type": "number",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Textrows"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "min": 1,
+                                                                    "max": "",
+                                                                    "step": ""
+                                                                },
+                                                                {
                                                                     "key": "field_61e7cf1d8f783",
                                                                     "label": "Custom validation",
                                                                     "name": "custom_validation",
                                                                     "type": "radio",
                                                                     "instructions": "",
                                                                     "required": 0,
-                                                                    "conditional_logic": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Textfield"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Email"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Number"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e951e9b648c",
+                                                                                "operator": "==",
+                                                                                "value": "Regular"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Password"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Textrows"
+                                                                            }
+                                                                        ]
+                                                                    ],
                                                                     "wrapper": {
                                                                         "width": "",
                                                                         "class": "",
@@ -578,6 +1007,425 @@
                                                                     },
                                                                     "layout": "block",
                                                                     "sub_fields": []
+                                                                },
+                                                                {
+                                                                    "key": "field_61e9506fb647b",
+                                                                    "label": "Special Parameters",
+                                                                    "name": "",
+                                                                    "type": "tab",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "!=",
+                                                                                "value": "Checkbox"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "!=",
+                                                                                "value": "Selection"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "!=",
+                                                                                "value": "Date"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "!=",
+                                                                                "value": "Slider"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "placement": "top",
+                                                                    "endpoint": 0
+                                                                },
+                                                                {
+                                                                    "key": "field_61ee5c22b2160",
+                                                                    "label": "Radio Group Grid",
+                                                                    "name": "radio_grid",
+                                                                    "type": "select",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Radio Group"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "choices": {
+                                                                        "Column": "Column",
+                                                                        "Row": "Row"
+                                                                    },
+                                                                    "default_value": "Column",
+                                                                    "allow_null": 0,
+                                                                    "multiple": 0,
+                                                                    "ui": 0,
+                                                                    "return_format": "value",
+                                                                    "ajax": 0,
+                                                                    "placeholder": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61e951e9b648c",
+                                                                    "label": "Number Field Type",
+                                                                    "name": "number_field_type",
+                                                                    "type": "select",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Number"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "choices": {
+                                                                        "Regular": "Regular",
+                                                                        "PIN": "PIN",
+                                                                        "Counter": "Counter"
+                                                                    },
+                                                                    "default_value": "Regular",
+                                                                    "allow_null": 0,
+                                                                    "multiple": 0,
+                                                                    "ui": 0,
+                                                                    "return_format": "value",
+                                                                    "ajax": 0,
+                                                                    "placeholder": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61e967ddc51a4",
+                                                                    "label": "Telephone",
+                                                                    "name": "telephone",
+                                                                    "type": "radio",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Number"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e951e9b648c",
+                                                                                "operator": "==",
+                                                                                "value": "Regular"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "choices": {
+                                                                        "Yes": "Yes",
+                                                                        "No": "No"
+                                                                    },
+                                                                    "allow_null": 0,
+                                                                    "other_choice": 0,
+                                                                    "default_value": "No",
+                                                                    "layout": "horizontal",
+                                                                    "return_format": "value",
+                                                                    "save_other_choice": 0
+                                                                },
+                                                                {
+                                                                    "key": "field_61e9509bb647c",
+                                                                    "label": "Minimum length",
+                                                                    "name": "minimum_length",
+                                                                    "type": "number",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Textfield"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7cf1d8f783",
+                                                                                "operator": "==",
+                                                                                "value": "Deny"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Number"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7cf1d8f783",
+                                                                                "operator": "==",
+                                                                                "value": "Deny"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e951e9b648c",
+                                                                                "operator": "==",
+                                                                                "value": "Regular"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Password"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7cf1d8f783",
+                                                                                "operator": "==",
+                                                                                "value": "Deny"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Email"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7cf1d8f783",
+                                                                                "operator": "==",
+                                                                                "value": "Deny"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Textrows"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7cf1d8f783",
+                                                                                "operator": "==",
+                                                                                "value": "Deny"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "min": 1,
+                                                                    "max": "",
+                                                                    "step": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61e9514bb6482",
+                                                                    "label": "Maximum length",
+                                                                    "name": "maximum_length",
+                                                                    "type": "number",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Textfield"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7cf1d8f783",
+                                                                                "operator": "==",
+                                                                                "value": "Deny"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Email"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7cf1d8f783",
+                                                                                "operator": "==",
+                                                                                "value": "Deny"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Number"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7cf1d8f783",
+                                                                                "operator": "==",
+                                                                                "value": "Deny"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e951e9b648c",
+                                                                                "operator": "==",
+                                                                                "value": "Regular"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Password"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7cf1d8f783",
+                                                                                "operator": "==",
+                                                                                "value": "Deny"
+                                                                            }
+                                                                        ],
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Textrows"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e7cf1d8f783",
+                                                                                "operator": "==",
+                                                                                "value": "Deny"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "min": 1,
+                                                                    "max": "",
+                                                                    "step": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61e95273b648e",
+                                                                    "label": "Characters Amount",
+                                                                    "name": "characters_amount",
+                                                                    "type": "number",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Number"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e951e9b648c",
+                                                                                "operator": "==",
+                                                                                "value": "PIN"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "min": 1,
+                                                                    "max": 36,
+                                                                    "step": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61e95327b6493",
+                                                                    "label": "Counter Min Value",
+                                                                    "name": "counter_min_value",
+                                                                    "type": "number",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Number"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e951e9b648c",
+                                                                                "operator": "==",
+                                                                                "value": "Counter"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "min": 0,
+                                                                    "max": "",
+                                                                    "step": ""
+                                                                },
+                                                                {
+                                                                    "key": "field_61e9538fb6498",
+                                                                    "label": "Counter Max Value",
+                                                                    "name": "counter_max_value",
+                                                                    "type": "number",
+                                                                    "instructions": "",
+                                                                    "required": 0,
+                                                                    "conditional_logic": [
+                                                                        [
+                                                                            {
+                                                                                "field": "field_61e7ce768f782",
+                                                                                "operator": "==",
+                                                                                "value": "Number"
+                                                                            },
+                                                                            {
+                                                                                "field": "field_61e951e9b648c",
+                                                                                "operator": "==",
+                                                                                "value": "Counter"
+                                                                            }
+                                                                        ]
+                                                                    ],
+                                                                    "wrapper": {
+                                                                        "width": "",
+                                                                        "class": "",
+                                                                        "id": ""
+                                                                    },
+                                                                    "default_value": "",
+                                                                    "placeholder": "",
+                                                                    "prepend": "",
+                                                                    "append": "",
+                                                                    "min": 0,
+                                                                    "max": "",
+                                                                    "step": ""
                                                                 }
                                                             ]
                                                         }
@@ -680,7 +1528,7 @@
             {
                 "param": "page",
                 "operator": "==",
-                "value": "12"
+                "value": "75"
             }
         ]
     ],
@@ -693,5 +1541,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1642582212
+    "modified": 1643011239
 }

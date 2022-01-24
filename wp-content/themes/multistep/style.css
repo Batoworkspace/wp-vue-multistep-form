@@ -472,7 +472,7 @@ big {
 /* Elements
 --------------------------------------------- */
 body {
-	background: #fff;
+	background-color: #181818;
 }
 
 hr {
@@ -966,4 +966,11 @@ textarea {
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 1.5em;
+}
+
+/* Multistep form
+--------------------------------------------- */
+#multistep-form {
+	width: 50%;
+	margin: 0 auto;
 }

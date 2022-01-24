@@ -1,9 +1,9 @@
 /**
-* Media files pathes rewrite rules
-* Make Vue.js app images available for Wordpress
-* Rewrite relative pathes to WP absolute pathes
-* Using `themeName` variable in header.php
-*/
+ * Media files pathes rewrite rules
+ * Make Vue.js app images available for Wordpress
+ * Rewrite relative pathes to WP absolute pathes
+ * Using `themeName` variable in header.php
+ */
 
 document.addEventListener('load', rewriteMultistepPathes('#multistep-form'))
 

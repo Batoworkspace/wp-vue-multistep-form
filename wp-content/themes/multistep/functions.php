@@ -143,7 +143,7 @@ function multistep_scripts() {
 	wp_enqueue_style( 'multistep-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'multistep-style', 'rtl', 'replace' );
 
-	$app_style = glob('wp-content/themes/' . get_current_theme() . '/js/multistep-form/multistep/dist/css/app.*.css')[0];
+	$app_style = glob('wp-content/themes/' . get_current_theme() . '/js/multistep-form/multistep/dist/css/chunk-vendors.*.css')[0];
 	wp_enqueue_style( 'multistep-form-style', '/' . $app_style, array(), $MULTISTEP_VERSION );
 
 	wp_enqueue_script( 'multistep-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );

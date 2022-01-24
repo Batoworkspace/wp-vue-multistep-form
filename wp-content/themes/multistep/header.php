@@ -19,10 +19,21 @@
 
 	<?php wp_head(); ?>
 </head>
-<script>
-	const themeName = '<?php echo get_current_theme(); ?>'
-</script>
 
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
 	<div id="page" class="site">
+		
+		<!-- Theme name root -->
+		<script>
+			const themeName = '<?php echo get_current_theme(); ?>'
+			const themeString = document.createElement('span')
+			themeString.id = 'theme-name'
+			themeString.innerHTML = themeName
+			themeString.style.display = 'none'
+
+			const pageWrapElement = document.querySelector('#page')
+			if (pageWrapElement) {
+				pageWrapElement.before(themeString)
+			}
+		</script>

@@ -4,7 +4,7 @@
 
   # Fill in data
   $json = json_encode(array('data' => $form));
-  file_put_contents("wp-content/themes/" . get_current_theme() . "/js/multistep-form/multistep-settings.json", $json);
+  file_put_contents("wp-content/themes/" . get_current_theme() . "/js/multistep-form/multistep/multistep-settings.json", $json);
 ?>
 
 <div id="multistep"></div>
