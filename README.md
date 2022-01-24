@@ -1,6 +1,7 @@
 # WordPress Vue.js Multistep Form
-![Wordpress + Vue.js](preview.png?raw=true "Wordpress + Vue.js")
 ##### Universal ACF PRO based multistep form implementation
+
+![Wordpress + Vue.js](preview.png?raw=true "Wordpress + Vue.js")
 
 This form is created with Vue.js and it fully prepared to be easily installed to your project.
 You can use this repo in two ways:
