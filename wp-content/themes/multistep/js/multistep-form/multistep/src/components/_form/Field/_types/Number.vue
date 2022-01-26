@@ -234,11 +234,11 @@ export default {
       }
 
       &.v-btn--disabled.v-btn--has-bg {
-        border: solid 2px $dark_grey;
+        border: solid 2px $light_blue;
 
         &::before,
         &::after {
-          background-color: $dark_grey;
+          background-color: $light_blue;
         }
       }
 
