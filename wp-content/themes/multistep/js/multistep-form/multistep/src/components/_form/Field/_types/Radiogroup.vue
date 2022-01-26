@@ -1,5 +1,5 @@
 <template>
-  <v-col>
+  <v-col class="ma-n3">
     <v-radio-group
       :column="settings.radio_grid.toLowerCase() === 'column'"
       :row="settings.radio_grid.toLowerCase() === 'row'"
@@ -24,7 +24,7 @@ export default {
 
   data () {
     return {
-      required: this.settings.field_required.toLowerCase() === 'required' ? true : false
+      required: this.settings.field_required.toLowerCase() === 'required'
     }
   }
 }

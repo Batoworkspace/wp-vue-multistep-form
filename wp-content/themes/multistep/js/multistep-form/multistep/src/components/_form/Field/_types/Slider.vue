@@ -1,6 +1,6 @@
 <template>
   <v-col>
-    {{ slider }}
+    <div class="slider-value mb-1">{{ slider }}</div>
     <v-slider
       v-model="slider"
       :min="settings.slider_min_value || 0"
@@ -8,6 +8,9 @@
       :ticks="settings.slider_ticks.toLowerCase() === 'allow' ? 'always' : false"
       tick-size="6"
       :step="settings.slider_step || 1"
+      class="ml-n3"
+      color="#393E46"
+      track-color="#B4C4DE"
     />
   </v-col>
 </template>
@@ -22,10 +25,19 @@ export default {
 
   data () {
     return {
-      required: this.settings.field_required.toLowerCase() === 'required' ? true : false,
+      required: this.settings.field_required.toLowerCase() === 'required',
 
       slider: this.settings.slider_min_value || 0
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .slider-value {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $dark_grey;
+  }
+</style>

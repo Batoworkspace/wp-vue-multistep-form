@@ -1,5 +1,6 @@
 <template>
-  <v-col>
+  <v-col class="ma-n3">
+
     <!-- 'Regular' number field -->
     <v-text-field
       v-if="settings.number_field_type.toLowerCase() === 'regular'"
@@ -9,14 +10,16 @@
       pattern="[0-9]*"
       inputmode="numeric"
       :required="required"
-      :rules="required ? [...emptiness, ...defaultRules] : defaultRules"
+      :rules="checkRules"
       :placeholder="settings.placeholder || ''"
+      outlined
+      class="mt-4"
     />
 
     <!-- 'PIN' number field -->
     <div
       v-if="settings.number_field_type.toLowerCase() === 'pin'"
-      class="d-flex"
+      class="d-flex justify-space-between mt-4 mb-2 number-pin"
     >
       <input
         v-for="char in pinCharsAmount"
@@ -25,41 +28,44 @@
         pattern="[0-9]*"
         inputmode="numeric"
         maxlength="1"
-        placeholder="*"
+        placeholder="•"
         :required="required"
         v-model="pin.items[char - 1]"
         :ref="`pinItem_${char - 1}`"
         @input="handlePinInput($event, char - 1, pinCharsAmount)"
         @keyup="handlePinKeyup($event, char - 1, pinCharsAmount)"
         @keyup.delete="handlePinDelete($event, char - 1)"
+        :style="`width: calc(100% / ${pinCharsAmount} - 8px);`"
       />
     </div>
 
     <!-- 'Counter' number field -->
     <div
       v-if="settings.number_field_type.toLowerCase() === 'counter'"
-      class="d-flex"
+      class="d-flex mt-4 number-counter"
     >
       <v-btn
+        depressed
         :disabled="counter === counterMinValue"
         @click="counterMinus(counter, counterMinValue)"
-      >
-        M
-      </v-btn>
+        class="number-counter__button minus mr-2"
+      />
       <v-text-field
         type="number"
         pattern="[0-9]*"
         inputmode="numeric"
         :required="required"
         disabled
+        outlined
         v-model="counter"
+        class="number-counter__field"
       />
       <v-btn
+        depressed
         :disabled="counter === counterMaxValue"
         @click="counterPlus(counter, counterMaxValue)"
-      >
-        P
-      </v-btn>
+        class="number-counter__button plus ml-2"
+      />
     </div>
   </v-col>
 </template>
@@ -76,7 +82,7 @@ export default {
 
   data () {
     return {
-      required: this.settings.field_required.toLowerCase() === 'required' ? true : false,
+      required: this.settings.field_required.toLowerCase() === 'required',
 
       pin: {
         items: []
@@ -92,6 +98,31 @@ export default {
     },
     emptiness () {
       return GlobalConstants.fields.number.emptiness || []
+    },
+    checkRules () {
+      if (this.required) {
+        if (!this.settings.minimum_length && !this.settings.maximum_length) {
+          return [...this.emptiness, ...this.defaultRules]
+        }
+
+        if (this.settings.minimum_length && !this.settings.maximum_length) {
+          return [...this.emptiness, v => !!v && v.length >= this.settings.minimum_length || `Should be more than ${this.settings.minimum_length} characters`]
+        }
+
+        if (!this.settings.minimum_length && this.settings.maximum_length) {
+          return [...this.emptiness, v => !!v && v.length <= this.settings.maximum_length || `Should be less than ${this.settings.maximum_length} characters`]
+        }
+
+        if (this.settings.minimum_length && this.settings.maximum_length) {
+          return [
+            ...this.emptiness,
+            v => !!v && v.length >= this.settings.minimum_length || `Should be at least ${this.settings.minimum_length} characters long`,
+            v => !!v && v.length <= this.settings.maximum_length || `Should be not more than ${this.settings.maximum_length} characters long`
+          ]
+        }
+      }
+
+      return this.defaultRules
     },
 
     pinCharsAmount () {
@@ -156,3 +187,66 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .number-pin {
+    max-width: 50%;
+
+    input {
+      padding: 8px 6px;
+      text-align: center;
+      background-color: $light_grey;
+      border: solid 2px $light_grey;
+      border-radius: 4px;
+
+      &:focus {
+        border: solid 2px $dark_grey;
+      }
+    }
+  }
+
+  .number-counter {
+    max-width: 240px;
+
+    &__button {
+      height: 48px !important;
+      min-width: unset !important;
+      width: 48px;
+      background-color: $dark_grey !important;
+      border-radius: 0 !important;
+      position: relative;
+
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: calc(50% - 1px);
+        left: calc(50% - 15px);
+        width: 30px;
+        height: 2px;
+        background-color: $soft_white;
+        opacity: 1 !important;
+      }
+
+      &::after {
+        transform: rotate(90deg);
+      }
+
+      &.v-btn--disabled.v-btn--has-bg {
+        border: solid 2px $dark_grey;
+
+        &::before,
+        &::after {
+          background-color: $dark_grey;
+        }
+      }
+
+      &.minus {
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+</style>

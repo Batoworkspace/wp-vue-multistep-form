@@ -1,7 +1,7 @@
 <template>
-  <v-container>
+  <v-container class="pt-7">
     <v-row>
-      <v-col>
+      <v-col class="pa-0">
         <label v-if="fieldSettings.field_label" :for="fieldSettings.field_name">{{ fieldSettings.field_label || '' }}</label>
         <v-container>
           <v-row>

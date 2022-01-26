@@ -249,6 +249,25 @@
                                     "maxlength": ""
                                 },
                                 {
+                                    "key": "field_61ee9cf5b4e3d",
+                                    "label": "Previous Step Button Text",
+                                    "name": "prev_step_button_text",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
                                     "key": "field_61e6e9213d05d",
                                     "label": "Fields Groups",
                                     "name": "",
@@ -1541,5 +1560,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643011239
+    "modified": 1643027720
 }

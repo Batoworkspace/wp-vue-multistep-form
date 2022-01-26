@@ -1,8 +1,10 @@
 <template>
-  <v-col>
+  <v-col class="ma-n3">
     <v-select
       v-model="selection"
       :items="selectItems"
+      outlined
+      class="mt-4"
     />
   </v-col>
 </template>
@@ -17,7 +19,7 @@ export default {
 
   data () {
     return {
-      required: this.settings.field_required.toLowerCase() === 'required' ? true : false,
+      required: this.settings.field_required.toLowerCase() === 'required',
       
       selection: this.settings.select_default || this.selectItems[0] || ''
     }

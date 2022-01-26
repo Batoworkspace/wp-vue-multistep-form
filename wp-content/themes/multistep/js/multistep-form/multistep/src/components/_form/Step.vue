@@ -1,32 +1,65 @@
 <template>
-  <v-container>
-    <v-row v-if="stepSettings.step_title || stepSettings.step_description">
-      <v-col>
-        <h3><span v-if="isStepNumber.toLowerCase() === 'present'">{{ `${order}.` }}</span><div v-html="stepSettings.step_title || ''"><h3>
-        <p v-html="stepSettings.step_description || ''" />
+  <v-container class="step">
+
+    <!-- step header -->
+    <v-row
+      v-if="stepSettings.step_title || stepSettings.step_description"
+      class="step__header py-4"
+    >
+      <v-col class="px-6">
+        <h3 class="d-flex">
+          <div
+            v-if="isStepNumber.toLowerCase() === 'present'"
+            class="mr-2"
+          >{{ `${order}.` }}</div>
+          <div v-html="stepSettings.step_title || ''" />
+        </h3>
+        <p
+          v-html="stepSettings.step_description || ''"
+          class="subtitle"
+        />
       </v-col>
     </v-row>
+
+    <!-- groups list -->
     <v-row>
-      <v-col>
-        <v-container>
-          <v-row v-for="group in stepSettings.fields_group" :key="group.group.group_name">
-            <v-col>
-              <group :groupSettings="group.group" />
-            </v-col>
-          </v-row>
-        </v-container>
+      <v-col
+        v-for="group in stepSettings.fields_group" 
+        :key="group.group.group_name"
+        class="col-12 pt-8 mb-n4"
+      >
+        <group :groupSettings="group.group" />
       </v-col>
     </v-row>
-    <v-row v-if="!last">
-      <v-col>
-        <v-btn>
+
+    <!-- step controls -->
+    <v-row class="justify-space-between">
+      <v-col v-if="!first">
+        <v-btn
+          depressed
+          text
+          class="controls-button"
+          @click="goBack"
+        >
+          {{ stepSettings.prev_step_button_text || 'Previous step' }}
+        </v-btn>
+      </v-col>
+      <v-col v-if="!last" class="d-flex justify-end">
+        <v-btn
+          depressed
+          text
+          class="controls-button"
+          @click="goForward"
+        >
           {{ stepSettings.next_step_button_text || 'Next step' }}
         </v-btn>
       </v-col>
-    </v-row>
-    <v-row v-if="last">
-      <v-col>
-        <v-btn>
+      <v-col v-if="last" class="d-flex justify-end">
+        <v-btn
+          depressed
+          color="#00ADB5"
+          class="controls-button submit-button"
+        >
           {{ submitButton || 'Submit' }}
         </v-btn>
       </v-col>
@@ -45,6 +78,9 @@ export default {
     order: {
       type: Number
     },
+    first: {
+      type: Boolean
+    },
     last: {
       type: Boolean
     },
@@ -60,10 +96,36 @@ export default {
     Group
   },
 
-  data () {
-    return {
-      
+  methods: {
+    goBack () {
+      this.$emit('goBack')
+    },
+    goForward () {
+      this.$emit('goForward')
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .step {
+    &__header {
+      background-color: $light_grey;
+
+      .subtitle {
+        margin: 2px 0 0;
+      }
+    }
+
+    .controls-button {
+      background-color: $light_grey;
+      padding: 24px 42px !important;
+      border-radius: 0 !important;
+
+      &.submit-button {
+        color: $soft_white;
+        box-shadow: 0 0 16px rgb(0 111 117 / 40%);
+      }
+    }
+  }
+</style>

@@ -1,12 +1,14 @@
 <template>
-  <v-col>
+  <v-col class="ma-n3">
     <v-text-field
       :name="settings.field_name"
       :id="settings.field_name"
       type="email"
       :required="required"
-      :rules="required ? [...emptiness, ...defaultRules] : defaultRules"
+      :rules="checkRules"
       :placeholder="settings.placeholder || ''"
+      outlined
+      class="mt-4"
   />
   </v-col>
 </template>
@@ -23,7 +25,7 @@ export default {
 
   data () {
     return {
-      required: this.settings.field_required.toLowerCase() === 'required' ? true : false
+      required: this.settings.field_required.toLowerCase() === 'required'
     }
   },
 
@@ -33,6 +35,31 @@ export default {
     },
     emptiness () {
       return GlobalConstants.fields.email.emptiness || []
+    },
+    checkRules () {
+      if (this.required) {
+        if (!this.settings.minimum_length && !this.settings.maximum_length) {
+          return [...this.emptiness, ...this.defaultRules]
+        }
+
+        if (this.settings.minimum_length && !this.settings.maximum_length) {
+          return [...this.emptiness, v => !!v && v.length >= this.settings.minimum_length || `Should be more than ${this.settings.minimum_length} characters`]
+        }
+
+        if (!this.settings.minimum_length && this.settings.maximum_length) {
+          return [...this.emptiness, v => !!v && v.length <= this.settings.maximum_length || `Should be less than ${this.settings.maximum_length} characters`]
+        }
+
+        if (this.settings.minimum_length && this.settings.maximum_length) {
+          return [
+            ...this.emptiness,
+            v => !!v && v.length >= this.settings.minimum_length || `Should be at least ${this.settings.minimum_length} characters long`,
+            v => !!v && v.length <= this.settings.maximum_length || `Should be not more than ${this.settings.maximum_length} characters long`
+          ]
+        }
+      }
+
+      return this.defaultRules
     }
   }
 }

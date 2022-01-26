@@ -1,0 +1,219 @@
+/* Global variables */
+
+$font_size: 14px;
+$form_border_radius: 1rem;
+
+/* Application styles */
+
+.v-application {
+  font-family: 'Open Sans', 'Roboto', sans-serif !important;
+  color: $dark_blue !important;
+  font-weight: 400;
+  font-size: $font_size;
+  line-height: normal !important;
+  background-color: $transparent !important;
+
+  &--wrap {
+    min-height: unset !important;
+    border: solid 1px $light_grey;
+    border-radius: $form_border_radius;
+    background-color: $soft_white;
+    overflow: hidden;
+  }
+
+  & p {
+    margin-bottom: 0 !important;
+  }
+
+  /* Components styles */
+
+  * {
+    resize: none;
+  }
+
+  h2 {
+    font-weight: 800;
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  input, textarea {
+    font-size: $font_size;
+    outline: none;
+  }
+
+  input {
+    border: none;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type=number] {
+      -moz-appearance: textfield;
+    }
+  }
+
+  textarea {
+    margin-bottom: 10px;
+  }
+
+  /* Fields styles */
+
+  .v-text-field {
+    fieldset {
+      border: solid 1px $light_grey;
+      border-radius: 0;
+    }
+
+    &, .v-icon {
+      &.primary--text {
+        color: $light_blue !important;
+        caret-color: $light_blue !important;
+      }
+    }
+
+    .v-input__slot {
+      min-height: 3rem !important;
+    }
+
+    .v-input__append-inner {
+      margin-top: 11px;
+    }
+
+    .v-text-field__details {
+      display: none;
+      overflow: unset;
+
+      &::after {
+        content: "";
+        display: inline-block;
+        width: $font_size;
+        height: $font_size;
+        background-color: $dark_blue;
+        transform: rotate(45deg);
+        position: absolute;
+        right: 6px;
+        bottom: -4px;
+        z-index: 0;
+      }
+    }
+
+    &.v-input--has-state {
+      .v-text-field__details {
+        display: inline-block;
+        position: absolute;
+        top: -2.25rem;
+        right: 0.5rem;
+        background-color: $dark_blue;
+        padding: 6px !important;
+  
+        .v-messages__wrapper {
+          color: $soft_white !important;
+          z-index: 1;
+          position: relative;
+        }
+      }
+    }
+  }
+
+  .v-label,
+  .v-select__selection {
+    font-size: $font_size;
+    color: $dark_blue !important;
+  }
+
+  .v-input--checkbox,
+  .v-radio {
+    .v-icon {
+      color: $dark_grey !important;
+    }
+
+    .v-input--selection-controls__ripple {
+      color: $dark_grey !important;
+
+      & > * {
+        background-color: rgb($dark_grey, 10%);
+      }
+    }
+  }
+
+  .v-select {
+    & > .v-input__control > .v-input__slot {
+      padding: 0 16px !important;
+    }
+  }
+
+  .v-select-list {
+    padding: 2px;
+    background-color: $light_blue !important;
+
+    & > .v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
+      color: $dark_grey;
+    }
+
+    .v-list-item {
+      background-color: $white;
+
+      &--active {
+        color: $accent !important;
+      }
+
+      .v-list-item__content {
+        padding: 8px 0;
+  
+        & > .v-list-item__title {
+          font-size: $font_size;
+        }
+      }
+    }
+  }
+
+  .v-menu__content {
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .v-input__slider {
+    .v-slider__thumb {
+      width: 1.125rem;
+      height: 1.125rem;
+      left: -0.5625rem;
+      background-color: $white !important;
+      border: solid 2px $dark_grey !important;
+      border-radius: 0 !important;
+
+      &::before,
+      &::after {
+        display: none !important;
+      }
+    }
+
+    .v-slider__tick {
+      background-color: $light_blue;
+
+      &.v-slider__tick--filled {
+        background-color: $light_grey;
+      }
+    }
+  }
+
+  .number-counter {
+    &__field input {
+      text-align: center !important;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: $dark_grey !important;
+    }
+
+    &__button.v-btn--disabled.v-btn--has-bg {
+      background-color: $soft_white !important;
+    }
+  }
+}

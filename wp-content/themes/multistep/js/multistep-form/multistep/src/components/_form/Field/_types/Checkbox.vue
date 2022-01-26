@@ -1,9 +1,10 @@
 <template>
-  <v-col>
+  <v-col class="ma-n3">
     <v-checkbox
       :name="settings.field_name"
       :id="settings.field_name"
       :label="settings.checkbox_label || ''"
+      color="#00ADB5"
     />
   </v-col>
 </template>
@@ -18,7 +19,7 @@ export default {
 
   data () {
     return {
-      required: this.settings.field_required.toLowerCase() === 'required' ? true : false
+      required: this.settings.field_required.toLowerCase() === 'required'
     }
   }
 }

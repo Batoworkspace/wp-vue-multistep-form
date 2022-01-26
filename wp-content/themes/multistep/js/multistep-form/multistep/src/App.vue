@@ -3,7 +3,7 @@
     <v-main>
       <v-container tag="section">
         <v-row>
-          <v-col>
+          <v-col class="pa-0">
             <multistep-form :settings="settings" />
           </v-col>
         </v-row>
@@ -46,3 +46,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss"> // fake style for app.css integration
+  .fake { all: unset; }
+</style>

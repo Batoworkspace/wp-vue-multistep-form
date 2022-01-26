@@ -472,7 +472,8 @@ big {
 /* Elements
 --------------------------------------------- */
 body {
-	background-color: #181818;
+	background-color: #fff;
+	padding: 40px;
 }
 
 hr {
