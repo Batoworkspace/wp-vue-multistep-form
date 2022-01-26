@@ -216,4 +216,11 @@ $form_border_radius: 1rem;
       background-color: $soft_white !important;
     }
   }
+
+  .multistep__form {
+    &_description > p {
+      margin-bottom: 1rem !important;
+      line-height: 1.6em;
+    }
+  }
 }

@@ -32,7 +32,11 @@
 
       <!-- form content -->
       <v-row class="align-start">
-        <v-col v-show="currentStep === index + 1" v-for="(step, index) in pureSettings.steps" :key="index">
+        <v-col
+          v-show="currentStep === index + 1" v-for="(step, index) in pureSettings.steps"
+          :key="index"
+          :class="[{ 'horizontal-separator': pureSettings.form_description }, { 'pb-8': pureSettings.form_description }]"
+        >
           <step
             :stepSettings="step.step"
             :order="index + 1"
@@ -47,7 +51,10 @@
       </v-row>
       <v-row v-if="pureSettings.form_description">
         <v-col>
-          <p v-html="pureSettings.form_description || ''" />
+          <div
+            v-html="pureSettings.form_description || ''"
+            class="px-6 pb-4 pt-8 multistep__form_description"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -124,5 +131,9 @@ export default {
         font-weight: 300;
       }
     }
+  }
+
+  .horizontal-separator {
+    border-bottom: solid 1px #eee;
   }
 </style>
