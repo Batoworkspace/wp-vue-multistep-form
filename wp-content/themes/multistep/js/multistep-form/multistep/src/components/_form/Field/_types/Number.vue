@@ -4,6 +4,7 @@
     <!-- 'Regular' number field -->
     <v-text-field
       v-if="settings.number_field_type.toLowerCase() === 'regular'"
+      v-model="fieldData"
       :name="settings.field_name"
       :id="settings.field_name"
       :type="settings.telephone.toLowerCase() === 'yes' ? 'tel' : 'number'"
@@ -84,11 +85,31 @@ export default {
     return {
       required: this.settings.field_required.toLowerCase() === 'required',
 
+      fieldData: '',
+
       pin: {
         items: []
       },
 
       counter: Number.parseInt(this.settings.counter_min_value) || 0
+    }
+  },
+
+  watch: {
+    fieldData (value) {
+      this.raise(value)
+    },
+
+    pin: {
+      deep: true,
+
+      handler (value) {
+        this.raise(value.items && value.items.length !== 0 ? value.items.join('') : '')
+      }
+    },
+
+    counter (value) {
+      this.raise(value)
     }
   },
 
@@ -183,6 +204,10 @@ export default {
       if (value < max) {
         this.counter = value + 1
       }
+    },
+
+    raise (data) {
+      this.$emit('raise', data)
     }
   }
 }

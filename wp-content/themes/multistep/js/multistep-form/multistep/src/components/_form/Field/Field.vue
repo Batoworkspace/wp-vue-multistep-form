@@ -8,6 +8,7 @@
             <component
               :is="fieldSettings.field_type.toLowerCase().replace(/\s/g, '')"
               :settings="fieldSettings"
+              @raise="setFieldData"
             />
           </v-row>
         </v-container>
@@ -46,6 +47,31 @@ export default {
     Radiogroup,
     Slider,
     Date
+  },
+
+  data () {
+    return {
+      fieldData: {
+        key: this.fieldSettings.field_name,
+        value: null
+      }
+    }
+  },
+
+  watch: {
+    'fieldData.value' () {
+      this.raise(this.fieldData)
+    }
+  },
+
+  methods: {
+    setFieldData (data) {
+      this.fieldData.value = data
+    },
+
+    raise (data) {
+      this.$emit('raise', data)
+    }
   }
 }
 </script>

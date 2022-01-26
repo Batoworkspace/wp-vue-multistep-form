@@ -1,6 +1,7 @@
 <template>
   <v-col class="ma-n3">
     <v-text-field
+      v-model="fieldData"
       :name="settings.field_name"
       :id="settings.field_name"
       :required="required"
@@ -24,7 +25,15 @@ export default {
 
   data () {
     return {
-      required: this.settings.field_required.toLowerCase() === 'required'
+      required: this.settings.field_required.toLowerCase() === 'required',
+
+      fieldData: ''
+    }
+  },
+
+  watch: {
+    fieldData (value) {
+      this.raise(value)
     }
   },
 
@@ -59,6 +68,12 @@ export default {
       }
 
       return this.defaultRules
+    }
+  },
+
+  methods: {
+    raise (data) {
+      this.$emit('raise', data)
     }
   }
 }

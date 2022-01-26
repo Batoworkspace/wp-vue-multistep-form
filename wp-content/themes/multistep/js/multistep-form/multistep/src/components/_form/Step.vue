@@ -28,7 +28,7 @@
         :key="group.group.group_name"
         class="col-12 pt-8 mb-n4"
       >
-        <group :groupSettings="group.group" />
+        <group :groupSettings="group.group" @raise="setGroupsData" />
       </v-col>
     </v-row>
 
@@ -96,12 +96,38 @@ export default {
     Group
   },
 
+  data () {
+    return {
+      stepData: {
+        key: this.stepSettings.step_name,
+        groups: {}
+      },
+
+      deep: false
+    }
+  },
+
+  watch: {
+    deep () {
+      this.raise(this.stepData)
+    }
+  },
+
   methods: {
     goBack () {
       this.$emit('goBack')
     },
     goForward () {
       this.$emit('goForward')
+    },
+
+    setGroupsData (data) {
+      this.stepData.groups[data.key] = data.fields
+      this.deep = !this.deep
+    },
+
+    raise (data) {
+      this.$emit('raise', data)
     }
   }
 }

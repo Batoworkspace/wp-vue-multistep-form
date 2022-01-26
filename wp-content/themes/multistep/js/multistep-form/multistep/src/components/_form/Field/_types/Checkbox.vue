@@ -1,6 +1,7 @@
 <template>
   <v-col class="ma-n3">
     <v-checkbox
+      v-model="checkbox"
       :name="settings.field_name"
       :id="settings.field_name"
       :label="settings.checkbox_label || ''"
@@ -19,7 +20,21 @@ export default {
 
   data () {
     return {
-      required: this.settings.field_required.toLowerCase() === 'required'
+      required: this.settings.field_required.toLowerCase() === 'required',
+
+      checkbox: false
+    }
+  },
+
+  watch: {
+    checkbox (value) {
+      this.raise(value)
+    }
+  },
+
+  methods: {
+    raise (data) {
+      this.$emit('raise', data)
     }
   }
 }

@@ -11,7 +11,10 @@
         :key="field.field.field_name"
         :class="`col-${12 / (groupSettings.group_columns || 1)} pa-0`"
       >
-        <field :fieldSettings="field.field" />
+        <field
+          :fieldSettings="field.field"
+          @raise="setFieldsData"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -29,6 +32,34 @@ export default {
 
   components: {
     Field
+  },
+
+  data () {
+    return {
+      groupData: {
+        key: this.groupSettings.group_name,
+        fields: {}
+      },
+
+      deep: false
+    }
+  },
+
+  watch: {
+    deep () {
+      this.raise(this.groupData)
+    }
+  },
+
+  methods: {
+    setFieldsData (data) {
+      this.groupData.fields[data.key] = data.value
+      this.deep = !this.deep
+    },
+
+    raise (data) {
+      this.$emit('raise', data)
+    }
   }
 }
 </script>

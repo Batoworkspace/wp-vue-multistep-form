@@ -1,6 +1,7 @@
 <template>
   <v-col class="ma-n3">
     <v-radio-group
+      v-model="radioGroup"
       :column="settings.radio_grid.toLowerCase() === 'column'"
       :row="settings.radio_grid.toLowerCase() === 'row'"
     >
@@ -24,7 +25,21 @@ export default {
 
   data () {
     return {
-      required: this.settings.field_required.toLowerCase() === 'required'
+      required: this.settings.field_required.toLowerCase() === 'required',
+
+      radioGroup: this.settings.radio_items[0].radio_button_value || 0
+    }
+  },
+
+  watch: {
+    radioGroup (value) {
+      this.raise(value)
+    }
+  },
+
+  methods: {
+    raise (data) {
+      this.$emit('raise', data)
     }
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <v-col class="ma-n3">
     <v-text-field
+      v-model="fieldData"
       :append-icon="password.show ? 'mdi-eye' : 'mdi-eye-off'"
       :name="settings.field_name"
       :id="settings.field_name"
@@ -31,7 +32,15 @@ export default {
 
       password: {
         show: false
-      }
+      },
+
+      fieldData: ''
+    }
+  },
+
+  watch: {
+    fieldData (value) {
+      this.raise(value)
     }
   },
 
@@ -66,6 +75,12 @@ export default {
       }
 
       return this.defaultRules
+    }
+  },
+
+  methods: {
+    raise (data) {
+      this.$emit('raise', data)
     }
   }
 }

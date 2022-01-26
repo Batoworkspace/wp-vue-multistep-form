@@ -1,6 +1,6 @@
 <template>
   <v-col>
-    <div class="slider-value mb-1">{{ slider }}</div>
+    <div class="slider-value mb-1 ml-n3">{{ slider }}</div>
     <v-slider
       v-model="slider"
       :min="settings.slider_min_value || 0"
@@ -28,6 +28,18 @@ export default {
       required: this.settings.field_required.toLowerCase() === 'required',
 
       slider: this.settings.slider_min_value || 0
+    }
+  },
+
+  watch: {
+    slider (value) {
+      this.raise(value)
+    }
+  },
+
+  methods: {
+    raise (data) {
+      this.$emit('raise', data)
     }
   }
 }

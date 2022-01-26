@@ -192,6 +192,25 @@
                                     "endpoint": 0
                                 },
                                 {
+                                    "key": "field_61f15cb8ae614",
+                                    "label": "Step Name",
+                                    "name": "step_name",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 1,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
                                     "key": "field_61e6e7f94ac61",
                                     "label": "Step Title",
                                     "name": "step_title",
@@ -1560,5 +1579,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643027720
+    "modified": 1643207904
 }

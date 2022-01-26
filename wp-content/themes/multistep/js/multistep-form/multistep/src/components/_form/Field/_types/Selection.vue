@@ -25,9 +25,21 @@ export default {
     }
   },
 
+  watch: {
+    selection (value) {
+      this.raise(value)
+    }
+  },
+
   computed: {
     selectItems () {
       return this.settings.select_items.split(', ')
+    }
+  },
+
+  methods: {
+    raise (data) {
+      this.$emit('raise', data)
     }
   }
 }

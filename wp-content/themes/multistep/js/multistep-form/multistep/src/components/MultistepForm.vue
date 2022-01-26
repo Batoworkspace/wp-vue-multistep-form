@@ -34,7 +34,7 @@
       <v-row class="align-start">
         <v-col
           v-show="currentStep === index + 1" v-for="(step, index) in pureSettings.steps"
-          :key="index"
+          :key="step.step.step_name"
           :class="[{ 'horizontal-separator': pureSettings.form_description }, { 'pb-8': pureSettings.form_description }]"
         >
           <step
@@ -46,6 +46,7 @@
             :isStepNumber="pureSettings.form_display.step_number"
             @goBack="setStep(index)"
             @goForward="setStep(index + 2)"
+            @raise="setFormData"
           />
         </v-col>
       </v-row>
@@ -79,7 +80,12 @@ export default {
     return {
       valid: true,
 
-      currentStep: 1
+      currentStep: 1,
+
+      formData: {
+        name: 'Multistep Form',
+        data: {}
+      }
     }
   },
 
@@ -106,6 +112,12 @@ export default {
   methods: {
     setStep (step) {
       this.currentStep = step
+    },
+
+    setFormData (data) {
+      this.formData.data[data.key] = data.groups
+      
+      console.log(this.formData)
     }
   }
 }
