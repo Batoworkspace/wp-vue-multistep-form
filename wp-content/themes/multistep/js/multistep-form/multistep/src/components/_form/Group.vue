@@ -53,7 +53,7 @@ export default {
 
   methods: {
     setFieldsData (data) {
-      this.groupData.fields[data.key] = data.value
+      this.groupData.fields[data.key] = { value: data.value, required: data.required }
       this.deep = !this.deep
     },
 

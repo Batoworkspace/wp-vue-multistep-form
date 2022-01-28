@@ -37,6 +37,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.raise(this.slider)
+  },
+
   methods: {
     raise (data) {
       this.$emit('raise', data)

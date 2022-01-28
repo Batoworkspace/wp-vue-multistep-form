@@ -37,6 +37,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.raise(this.radioGroup)
+  },
+
   methods: {
     raise (data) {
       this.$emit('raise', data)

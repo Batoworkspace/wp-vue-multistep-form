@@ -6,7 +6,7 @@
       :id="settings.field_name"
       type="email"
       :required="required"
-      :rules="checkRules"
+      :rules="!required ? [...checkRules] : [...checkRules, ...emptiness]"
       :placeholder="settings.placeholder || ''"
       outlined
       class="mt-4"
@@ -46,30 +46,35 @@ export default {
       return GlobalConstants.fields.email.emptiness || []
     },
     checkRules () {
-      if (this.required) {
+      if (this.fieldData) {
         if (!this.settings.minimum_length && !this.settings.maximum_length) {
-          return [...this.emptiness, ...this.defaultRules]
+          return [...this.defaultRules]
         }
 
         if (this.settings.minimum_length && !this.settings.maximum_length) {
-          return [...this.emptiness, v => !!v && v.length >= this.settings.minimum_length || `Should be more than ${this.settings.minimum_length} characters`]
+          return [v => !!v && v.length >= this.settings.minimum_length || `Should be more than ${this.settings.minimum_length} characters`]
         }
 
         if (!this.settings.minimum_length && this.settings.maximum_length) {
-          return [...this.emptiness, v => !!v && v.length <= this.settings.maximum_length || `Should be less than ${this.settings.maximum_length} characters`]
+          return [v => !!v && v.length <= this.settings.maximum_length || `Should be less than ${this.settings.maximum_length} characters`]
         }
 
         if (this.settings.minimum_length && this.settings.maximum_length) {
           return [
-            ...this.emptiness,
             v => !!v && v.length >= this.settings.minimum_length || `Should be at least ${this.settings.minimum_length} characters long`,
             v => !!v && v.length <= this.settings.maximum_length || `Should be not more than ${this.settings.maximum_length} characters long`
           ]
         }
+
+        return this.defaultRules
       }
 
-      return this.defaultRules
+      return []
     }
+  },
+
+  mounted () {
+    this.raise(this.fieldData)
   },
 
   methods: {

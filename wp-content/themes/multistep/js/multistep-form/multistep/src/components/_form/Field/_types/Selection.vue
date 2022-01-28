@@ -5,6 +5,7 @@
       :items="selectItems"
       outlined
       class="mt-4"
+      :required="required"
     />
   </v-col>
 </template>
@@ -35,6 +36,10 @@ export default {
     selectItems () {
       return this.settings.select_items.split(', ')
     }
+  },
+
+  mounted () {
+    this.raise(this.selection)
   },
 
   methods: {

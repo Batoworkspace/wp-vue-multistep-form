@@ -3,6 +3,7 @@
     <v-checkbox
       v-model="checkbox"
       :name="settings.field_name"
+      :required="required"
       :id="settings.field_name"
       :label="settings.checkbox_label || ''"
       color="#00ADB5"
@@ -30,6 +31,10 @@ export default {
     checkbox (value) {
       this.raise(value)
     }
+  },
+
+  mounted () {
+    this.raise(this.checkbox)
   },
 
   methods: {

@@ -11,7 +11,7 @@
       pattern="[0-9]*"
       inputmode="numeric"
       :required="required"
-      :rules="checkRules"
+      :rules="!required ? [...checkRules] : [...checkRules, ...emptiness]"
       :placeholder="settings.placeholder || ''"
       outlined
       class="mt-4"
@@ -104,7 +104,8 @@ export default {
       deep: true,
 
       handler (value) {
-        this.raise(value.items && value.items.length !== 0 ? value.items.join('') : '')
+        const isPinFilled = value.items && value.items.length === this.pinCharsAmount && !value.items.some(item => item === '' || item === null)
+        this.raise(isPinFilled ? value.items.join('') : '')
       }
     },
 
@@ -121,29 +122,30 @@ export default {
       return GlobalConstants.fields.number.emptiness || []
     },
     checkRules () {
-      if (this.required) {
+      if (this.fieldData) {
         if (!this.settings.minimum_length && !this.settings.maximum_length) {
-          return [...this.emptiness, ...this.defaultRules]
+          return [...this.defaultRules]
         }
 
         if (this.settings.minimum_length && !this.settings.maximum_length) {
-          return [...this.emptiness, v => !!v && v.length >= this.settings.minimum_length || `Should be more than ${this.settings.minimum_length} characters`]
+          return [v => !!v && v.length >= this.settings.minimum_length || `Should be more than ${this.settings.minimum_length} characters`]
         }
 
         if (!this.settings.minimum_length && this.settings.maximum_length) {
-          return [...this.emptiness, v => !!v && v.length <= this.settings.maximum_length || `Should be less than ${this.settings.maximum_length} characters`]
+          return [v => !!v && v.length <= this.settings.maximum_length || `Should be less than ${this.settings.maximum_length} characters`]
         }
 
         if (this.settings.minimum_length && this.settings.maximum_length) {
           return [
-            ...this.emptiness,
             v => !!v && v.length >= this.settings.minimum_length || `Should be at least ${this.settings.minimum_length} characters long`,
             v => !!v && v.length <= this.settings.maximum_length || `Should be not more than ${this.settings.maximum_length} characters long`
           ]
         }
+
+        return this.defaultRules
       }
 
-      return this.defaultRules
+      return []
     },
 
     pinCharsAmount () {
@@ -155,6 +157,16 @@ export default {
     },
     counterMaxValue () {
       return Number.parseInt(this.settings.counter_max_value) || 12
+    }
+  },
+
+  mounted () {
+    if (this.settings.number_field_type.toLowerCase() === 'regular') {
+      this.raise(this.fieldData)
+    } else if (this.settings.number_field_type.toLowerCase() === 'pin') {
+      this.raise(this.pin.items.join(''))
+    } else {
+      this.raise(this.counter)
     }
   },
 

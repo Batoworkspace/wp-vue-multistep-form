@@ -2,7 +2,9 @@
   <v-container class="pt-7">
     <v-row>
       <v-col class="pa-0">
-        <label v-if="fieldSettings.field_label" :for="fieldSettings.field_name">{{ fieldSettings.field_label || '' }}</label>
+        <label v-if="fieldSettings.field_label" :for="fieldSettings.field_name">
+          {{ fieldSettings.field_label || '' }}<sup v-if="requiredMark">*</sup>
+        </label>
         <v-container>
           <v-row>
             <component
@@ -53,7 +55,8 @@ export default {
     return {
       fieldData: {
         key: this.fieldSettings.field_name,
-        value: null
+        value: null,
+        required: this.fieldSettings.field_required.toLowerCase() === 'required'
       }
     }
   },
@@ -61,6 +64,33 @@ export default {
   watch: {
     'fieldData.value' () {
       this.raise(this.fieldData)
+    }
+  },
+
+  computed: {
+    requiredMark () {
+      if (this.fieldSettings.field_required.toLowerCase() === 'required') {
+        const notBeingMarked = [
+          'checkbox',
+          'radiogroup',
+          'selection',
+          'slider'
+        ]
+
+        if (notBeingMarked.some(type => type === this.fieldSettings.field_type.toLowerCase().replace(/\s/g, ''))) {
+          return false
+        }
+
+        if (this.fieldSettings.field_type.toLowerCase().replace(/\s/g, '') === 'number') {
+          if (this.fieldSettings.number_field_type.toLowerCase() === 'counter') {
+            return false
+          }
+        }
+
+        return true
+      }
+
+      return false
     }
   },
 
@@ -75,3 +105,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  label sup {
+    color: #ff5252;
+  }
+</style>
