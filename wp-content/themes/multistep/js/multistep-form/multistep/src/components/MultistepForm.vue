@@ -42,10 +42,13 @@
           :first="index === 0"
           :last="!((index + 1) < pureSettings.steps.length)"
           :submitButton="pureSettings.submit_button_text"
+          :isSubmit="isSubmit"
           :isStepNumber="pureSettings.form_display.step_number"
           @goBack="setStep(index)"
           @goForward="setStep(index + 2)"
           @raise="setFormData"
+          @drop="dropStepData"
+          @submit="submitForm"
         />
       </v-col>
     </v-row>
@@ -77,10 +80,24 @@ export default {
   data () {
     return {
       currentStep: 1,
+      isDataSetted: false,
+      isSubmit: false,
 
       formData: {
         name: 'Multistep Form',
         data: {}
+      },
+
+      deep: false
+    }
+  },
+
+  watch: {
+    deep () {
+      if (Object.values(this.formData.data).length === this.pureSettings.steps.length) {
+        this.isSubmit = true
+      } else {
+        this.isSubmit = false
       }
     }
   },
@@ -112,8 +129,20 @@ export default {
 
     setFormData (data) {
       this.formData.data[data.key] = data.groups
-      
-      console.log(this.formData)
+
+      this.deep = !this.deep
+    },
+
+    dropStepData (data) {
+      delete this.formData.data[data.key]
+
+      this.deep = !this.deep
+    },
+
+    submitForm () {
+      if (this.isSubmit) {
+        console.log('formData:', this.formData.data)
+      }
     }
   }
 }

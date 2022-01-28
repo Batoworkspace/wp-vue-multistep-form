@@ -51,6 +51,7 @@ export default {
 
 <style lang="scss" scoped>
   .slider-value {
+    width: 100%;
     text-align: center;
     font-size: 1.25rem;
     font-weight: 700;

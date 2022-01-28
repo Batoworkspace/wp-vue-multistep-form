@@ -59,9 +59,10 @@
         <v-col v-if="last" class="d-flex justify-end">
           <v-btn
             depressed
-            :disabled="!checkValid"
+            :disabled="!isSubmit"
             color="#00ADB5"
             class="controls-button submit-button"
+            @click="raiseSubmit"
           >
             {{ submitButton || 'Submit' }}
           </v-btn>
@@ -91,6 +92,9 @@ export default {
     submitButton: {
       type: String
     },
+    isSubmit: {
+      type: Boolean
+    },
     isStepNumber: {
       type: Number
     }
@@ -116,9 +120,41 @@ export default {
 
   watch: {
     deep () {
+      const fields = []
+      Object.keys(this.stepData.groups).forEach(group => {
+        const groupFields = this.stepData.groups[group]
+
+        Object.values(groupFields).forEach(field => {
+          fields.push(field)
+        })
+      })
+
+      const isRequiredEmpty = fields.some(field => (field.value === null || field.value === '') && field.required)
+      if (this.valid && !isRequiredEmpty) {
+        this.checkValid = true
+      } else {
+        this.checkValid = false
+      }
+
       if (this.checkValid) {
         this.raise(this.stepData)
+      } else {
+        this.drop(this.stepData)
       }
+    }
+  },
+
+  methods: {
+    goBack () {
+      this.$emit('goBack')
+    },
+    goForward () {
+      this.$emit('goForward')
+    },
+
+    setGroupsData (data) {
+      this.stepData.groups[data.key] = data.fields
+      this.deep = !this.deep
 
       const fields = []
       Object.keys(this.stepData.groups).forEach(group => {
@@ -135,24 +171,22 @@ export default {
       } else {
         this.checkValid = false
       }
-    }
-  },
 
-  methods: {
-    goBack () {
-      this.$emit('goBack')
-    },
-    goForward () {
-      this.$emit('goForward')
-    },
-
-    setGroupsData (data) {
-      this.stepData.groups[data.key] = data.fields
-      this.deep = !this.deep
+      if (this.checkValid) {
+        this.raise(this.stepData)
+      }
     },
 
     raise (data) {
       this.$emit('raise', data)
+    },
+
+    drop (data) {
+      this.$emit('drop', data)
+    },
+
+    raiseSubmit () {
+      this.$emit('submit')
     }
   }
 }
