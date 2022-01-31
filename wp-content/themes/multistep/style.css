@@ -975,3 +975,20 @@ textarea {
 	width: 50%;
 	margin: 0 auto;
 }
+
+@media screen and (max-width: 1263px) { /* vuetify tablet breakpoint */
+	body {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+	
+	#multistep-form {
+		width: 70%;
+	}
+}
+
+@media screen and (max-width: 959px) { /* vuetify mobile breakpoint */
+	#multistep-form {
+		width: 100%;
+	}
+}

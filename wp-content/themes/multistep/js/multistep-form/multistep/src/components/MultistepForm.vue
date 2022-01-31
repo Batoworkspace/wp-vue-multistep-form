@@ -6,7 +6,7 @@
       v-if="pureSettings.form_title || pureSettings.form_subtitle"
       class="multistep__form_header"
     >
-      <v-col>
+      <v-col class="px-0 px-sm-3">
         <v-container>
           <v-row class="align-center">
             <v-col class="col-12 col-md-9">
@@ -16,7 +16,7 @@
                 class="subtitle"
               />
             </v-col>
-            <v-col class="col-12 col-md-3 d-flex justify-end">
+            <v-col class="col-12 col-md-3 d-flex justify-md-end">
               <div
                 v-if="pureSettings.form_display.progress_bar.toLowerCase() === 'present'"
                 class="steps-counter"
@@ -56,7 +56,7 @@
       <v-col>
         <div
           v-html="pureSettings.form_description || ''"
-          class="px-6 pb-4 pt-8 multistep__form_description"
+          class="px-0 px-sm-3 px-md-6 pb-4 pt-sm-8 multistep__form_description"
         />
       </v-col>
     </v-row>
@@ -161,6 +161,8 @@ export default {
         padding: 8px 16px;
         border-radius: 32px;
         color: $dark_blue;
+
+        @include media($xs, font-size, 1.1rem);
       }
 
       .subtitle {

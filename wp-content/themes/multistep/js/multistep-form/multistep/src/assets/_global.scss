@@ -3,6 +3,16 @@
 $font_size: 14px;
 $form_border_radius: 1rem;
 
+$xs: 411px;
+$sm: 959px;
+$md: 1263px;
+
+@mixin media ($breakpoint, $property, $value) {
+  @media screen and (max-width: #{$breakpoint}) {
+    #{$property}: $value;
+  }
+}
+
 /* Application styles */
 
 .v-application {
@@ -19,6 +29,10 @@ $form_border_radius: 1rem;
     border-radius: $form_border_radius;
     background-color: $soft_white;
     overflow: hidden;
+
+    @include media($sm, border-radius, calc(1rem / 1.5));
+
+    @include media($xs, border-radius, calc(1rem / 2));
   }
 
   & p {
@@ -34,11 +48,15 @@ $form_border_radius: 1rem;
   h2 {
     font-weight: 800;
     font-size: 1.8rem;
+
+    @include media($xs, font-size, 1.6rem);
   }
 
   h3 {
     font-weight: 700;
     font-size: 1.25rem;
+
+    @include media($xs, font-size, 1.1rem);
   }
 
   input, textarea {
@@ -218,9 +236,19 @@ $form_border_radius: 1rem;
   }
 
   .multistep__form {
+    &_description {
+      @include media($xs, padding-top, 16px);
+    }
+
     &_description > p {
       margin-bottom: 1rem !important;
       line-height: 1.6em;
+
+      @include media($xs, text-align, justify);
+
+      &:last-child {
+        @include media($xs, margin-bottom, 0 !important);
+      }
     }
   }
 }

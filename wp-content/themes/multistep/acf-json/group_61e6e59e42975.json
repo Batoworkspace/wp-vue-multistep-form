@@ -406,10 +406,9 @@
                                                     "choices": {
                                                         "1": "1",
                                                         "2": "2",
-                                                        "3": "3",
-                                                        "4": "4"
+                                                        "3": "3"
                                                     },
-                                                    "default_value": false,
+                                                    "default_value": 1,
                                                     "allow_null": 0,
                                                     "multiple": 0,
                                                     "ui": 0,
@@ -1579,5 +1578,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643207904
+    "modified": 1643619069
 }

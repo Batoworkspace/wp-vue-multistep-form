@@ -229,6 +229,10 @@ export default {
   .number-pin {
     max-width: 50%;
 
+    @include media($md, max-width, 70%);
+
+    @include media($sm, max-width, 100%);
+
     input {
       padding: 8px 6px;
       text-align: center;
@@ -244,6 +248,8 @@ export default {
 
   .number-counter {
     max-width: 240px;
+
+    @include media($xs, max-width, 100%);
 
     &__button {
       height: 48px !important;

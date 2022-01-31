@@ -5,9 +5,9 @@
       <!-- step header -->
       <v-row
         v-if="stepSettings.step_title || stepSettings.step_description"
-        class="step__header py-4"
+        class="mx-n6 mt-n6 mx-sm-n3 mt-sm-n3 step__header py-4"
       >
-        <v-col class="px-6">
+        <v-col class="px-3 px-sm-6">
           <h3 class="d-flex">
             <div
               v-if="isStepNumber.toLowerCase() === 'present'"
@@ -27,15 +27,15 @@
         <v-col
           v-for="group in stepSettings.fields_group" 
           :key="group.group.group_name"
-          class="col-12 pt-8 mb-n4"
+          class="col-12 pt-8 px-0 px-sm-3 mb-n4"
         >
           <group :groupSettings="group.group" @raise="setGroupsData" />
         </v-col>
       </v-row>
 
       <!-- step controls -->
-      <v-row class="justify-space-between">
-        <v-col v-if="!first">
+      <v-row class="mx-n6 mx-sm-n3 mt-8 justify-space-between">
+        <v-col class="col-12 col-sm-6" v-if="!first">
           <v-btn
             depressed
             text
@@ -45,7 +45,7 @@
             {{ stepSettings.prev_step_button_text || 'Previous step' }}
           </v-btn>
         </v-col>
-        <v-col v-if="!last" class="d-flex justify-end">
+        <v-col v-if="!last" :class="['col-12', 'col-sm-6', 'd-flex', { 'justify-sm-end': !first }]">
           <v-btn
             depressed
             text
@@ -56,7 +56,7 @@
             {{ stepSettings.next_step_button_text || 'Next step' }}
           </v-btn>
         </v-col>
-        <v-col v-if="last" class="d-flex justify-end">
+        <v-col v-if="last" class="col-12 col-sm-6 d-flex justify-sm-end">
           <v-btn
             depressed
             :disabled="!isSubmit"
@@ -206,6 +206,10 @@ export default {
       background-color: $light_grey;
       padding: 24px 42px !important;
       border-radius: 0 !important;
+
+      @include media($xs, width, 100%);
+
+      @include media($xs, height, 56px !important);
 
       &.submit-button {
         color: $soft_white;

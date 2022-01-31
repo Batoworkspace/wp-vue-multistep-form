@@ -9,7 +9,7 @@
       <v-col
         v-for="field in groupSettings.fields"
         :key="field.field.field_name"
-        :class="`col-${12 / (groupSettings.group_columns || 1)} pa-0`"
+        :class="`col-12 col-sm-${12 / (groupSettings.group_columns || 1)} pa-0`"
       >
         <field
           :fieldSettings="field.field"
